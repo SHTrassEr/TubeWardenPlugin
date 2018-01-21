@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "system",
+        "moduleResolution": "node",
+		"outFile": "../../dest/firefox/content.js",
+        "sourceMap": false
+    },
+    "include": [
+        "../common/d.ts/*.d.ts",
+        "../common/*.ts",
+        "*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "**/*.json"
+    ]
+}

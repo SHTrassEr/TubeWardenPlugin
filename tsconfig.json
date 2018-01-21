@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "system",
+        "moduleResolution": "node",
+		"outFile": "bin/common/content.js",
+        "sourceMap": false
+    },
+    "include": [
+        "src/common/d.ts/*.d.ts",
+        "src/common/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "**/*.json"
+    ]
+}
