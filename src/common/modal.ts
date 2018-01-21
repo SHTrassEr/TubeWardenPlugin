@@ -92,31 +92,36 @@ function showStatistics(e) {
             const data = this.response;
             const ctxLike = canvas.getContext("2d");
 
-            setTimeout(() => {
-                const chartLike = new Chart(ctxLike, {
-                    type: "line",
-                    data: {
-                        datasets: [{
-                            label: "Лайков",
-                            backgroundColor: "#268808",
-                            borderColor: "#268808",
-                            fill: false,
-                            lineTension: 0,
-                            data: data.map((d) => ({x: new Date (d.updatedAt), y: d.likeCount } )),
-                        },
-                        {
-                            label: "Дизлайков",
-                            fill: false,
-                            backgroundColor: "#de1616",
-                            borderColor: "#de1616",
-                            lineTension: 0,
-                            data: data.map((d) => ({x: new Date (d.updatedAt), y: d.dislikeCount } ))
-                        }],
-                    },
-                    options: chartJsOptions,
-                });
+            const linkDiv = document.createElement("div");
+            linkDiv.setAttribute("style", "font-size: 1.2em;padding: 5px 10px;");
+            linkDiv.innerHTML =
+                "<a style='text-decoration: none;float:left;' target='_blank' href='https://tubewarden.ru/about/'>поддержать проект</a>" +
+                "<a style='text-decoration: none;float:right;' target='_blank' href='https://tubewarden.ru/video/" +
+                videoId + "'>вся информация по видео</a>";
 
-            }, 100);
+            wrapperInnerBlock.appendChild(linkDiv);
+            const chartLike = new Chart(ctxLike, {
+                type: "line",
+                data: {
+                    datasets: [{
+                        label: "Лайков",
+                        backgroundColor: "#268808",
+                        borderColor: "#268808",
+                        fill: false,
+                        lineTension: 0,
+                        data: data.map((d) => ({x: new Date (d.updatedAt), y: d.likeCount } )),
+                    },
+                    {
+                        label: "Дизлайков",
+                        fill: false,
+                        backgroundColor: "#de1616",
+                        borderColor: "#de1616",
+                        lineTension: 0,
+                        data: data.map((d) => ({x: new Date (d.updatedAt), y: d.dislikeCount } ))
+                    }],
+                },
+                options: chartJsOptions,
+            });
         }
     };
 

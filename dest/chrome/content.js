@@ -130,32 +130,37 @@ function showStatistics(e) {
             var canvas = document.createElement("canvas");
             canvas.setAttribute("style", "height: 300px;");
             wrapperInnerBlock.appendChild(canvas);
-            var data_1 = this.response;
-            var ctxLike_1 = canvas.getContext("2d");
-            setTimeout(function () {
-                var chartLike = new Chart(ctxLike_1, {
-                    type: "line",
-                    data: {
-                        datasets: [{
-                                label: "Лайков",
-                                backgroundColor: "#268808",
-                                borderColor: "#268808",
-                                fill: false,
-                                lineTension: 0,
-                                data: data_1.map(function (d) { return ({ x: new Date(d.updatedAt), y: d.likeCount }); }),
-                            },
-                            {
-                                label: "Дизлайков",
-                                fill: false,
-                                backgroundColor: "#de1616",
-                                borderColor: "#de1616",
-                                lineTension: 0,
-                                data: data_1.map(function (d) { return ({ x: new Date(d.updatedAt), y: d.dislikeCount }); })
-                            }],
-                    },
-                    options: chartJsOptions,
-                });
-            }, 100);
+            var data = this.response;
+            var ctxLike = canvas.getContext("2d");
+            var linkDiv = document.createElement("div");
+            linkDiv.setAttribute("style", "font-size: 1.2em;padding: 5px 10px;");
+            linkDiv.innerHTML =
+                "<a style='text-decoration: none;float:left;' target='_blank' href='https://tubewarden.ru/about/'>поддержать проект</a>" +
+                    "<a style='text-decoration: none;float:right;' target='_blank' href='https://tubewarden.ru/video/" +
+                    videoId + "'>вся информация по видео</a>";
+            wrapperInnerBlock.appendChild(linkDiv);
+            var chartLike = new Chart(ctxLike, {
+                type: "line",
+                data: {
+                    datasets: [{
+                            label: "Лайков",
+                            backgroundColor: "#268808",
+                            borderColor: "#268808",
+                            fill: false,
+                            lineTension: 0,
+                            data: data.map(function (d) { return ({ x: new Date(d.updatedAt), y: d.likeCount }); }),
+                        },
+                        {
+                            label: "Дизлайков",
+                            fill: false,
+                            backgroundColor: "#de1616",
+                            borderColor: "#de1616",
+                            lineTension: 0,
+                            data: data.map(function (d) { return ({ x: new Date(d.updatedAt), y: d.dislikeCount }); })
+                        }],
+                },
+                options: chartJsOptions,
+            });
         }
     };
     xmlhttpStatistics.open("GET", "https://tubewarden.ru/api/statistics/" + videoId, true);
